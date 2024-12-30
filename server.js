@@ -1,6 +1,6 @@
+// imports
 require("dotenv").config();
 require("express-async-errors");
-
 const express = require("express");
 const app = express();
 
@@ -20,6 +20,7 @@ const cors = require("cors");
 const xss = require("xss-clean");
 const rateLimit = require("express-rate-limit");
 
+// middlewares
 app.set("trust proxy", 1);
 
 // Apply rate limiting
@@ -42,8 +43,10 @@ app.use("/api/v1/jobs", jobsRouter);
 app.use(notFoundMiddleware); 
 app.use(errorHandlerMiddleware); 
 
+// port var
 const port = process.env.PORT || 3000;
 
+// server start
 const start = async () => {
   try {
     await mongoose.connect(process.env.MONGO_URI);
